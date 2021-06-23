@@ -37,6 +37,9 @@ module Vagrant
         # different depending on mode.
         attr_accessor :run_mode
 
+        # Whether to log the command executed by `execute` or `assert_execute`.
+        attr_accessor :log_execute
+
         def initialize
           @component_paths = [
             Vagrant::Spec.source_root.join("acceptance"),
@@ -48,6 +51,7 @@ module Vagrant
           @skeleton_paths = []
           @vagrant_path   = "vagrant"
           @run_mode       = "standalone"
+          @log_execute    = true
         end
 
         # Tells vagrant-spec to acceptance test a certain provider.

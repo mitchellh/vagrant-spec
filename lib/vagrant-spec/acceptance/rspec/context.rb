@@ -45,7 +45,7 @@ shared_context "acceptance" do
   # Executes the given command in the context of the isolated environment.
   #
   # @return [Object]
-  def execute(*args, env: nil, log: true, &block)
+  def execute(*args, env: nil, log: config.log_execute, &block)
     env ||= environment
     status("Execute: #{args.join(" ")}") if log
     env.execute(*args, &block)
