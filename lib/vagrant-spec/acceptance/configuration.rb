@@ -37,6 +37,14 @@ module Vagrant
         # different depending on mode.
         attr_accessor :run_mode
 
+        # List of plugins to install in the isolated environment
+        attr_accessor :plugins
+
+        # Map of plugin licenses to install in the isolated environment. Should take
+        # the form:
+        # { plugin: path/to/license }
+        attr_accessor :licenses
+
         def initialize
           @component_paths = [
             Vagrant::Spec.source_root.join("acceptance"),

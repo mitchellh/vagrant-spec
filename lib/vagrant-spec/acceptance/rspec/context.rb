@@ -35,11 +35,21 @@ shared_context "acceptance" do
     env  = config.env.merge(env || {})
     env.merge!(extra_env)
 
-    Vagrant::Spec::AcceptanceIsolatedEnvironment.new(
+    iso_env = Vagrant::Spec::AcceptanceIsolatedEnvironment.new(
       apps: apps,
       env: env,
       skeleton_paths: skeleton_paths,
     )
+
+    Array(config.plugins).each do |plugin|
+      iso_env.execute("vagrant", "plugin", "install", plugin)
+    end
+
+    Array(config.licenses).each do |plugin, license|
+      iso_env.execute("vagrant", "plugin", "license", plugin, license)
+    end
+
+    iso_env
   end
 
   # Executes the given command in the context of the isolated environment.
