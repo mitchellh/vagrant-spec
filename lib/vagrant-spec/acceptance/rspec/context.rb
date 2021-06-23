@@ -15,8 +15,6 @@ shared_context "acceptance" do
 
   let(:config) { Vagrant::Spec::Acceptance.config }
 
-  let(:extra_env) { {} }
-
   # The skeleton paths that will be used to configure environments.
   let(:skeleton_paths) do
     root = Vagrant::Spec.source_root.join("acceptance", "support-skeletons")
@@ -33,7 +31,7 @@ shared_context "acceptance" do
   def new_environment(env=nil)
     apps = { "vagrant" => config.vagrant_path }
     env  = config.env.merge(env || {})
-    env.merge!(extra_env)
+    env.merge!(extra_env) if defined? extra_env
 
     Vagrant::Spec::AcceptanceIsolatedEnvironment.new(
       apps: apps,
