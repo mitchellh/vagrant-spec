@@ -13,6 +13,8 @@ module Vagrant
     # This class extends the normal IsolatedEnvironment to add some
     # additional helpers for executing applications within that environment.
     class AcceptanceIsolatedEnvironment < IsolatedEnvironment
+      attr_accessor :env
+      
       def initialize(apps: nil, env: nil, skeleton_paths: nil)
         super()
 
